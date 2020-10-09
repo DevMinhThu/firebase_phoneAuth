@@ -1,5 +1,6 @@
-import * as React from 'react';
-import firebase from '@react-native-firebase/app'
+import * as React from 'react'
+import * as firebase from 'firebase'
+import firebaseApp from '@react-native-firebase/app'
 import auth from '@react-native-firebase/auth'
 
 var firebaseConfig = {
@@ -12,8 +13,9 @@ var firebaseConfig = {
     appId: "1:101590223426:web:c73347f4c43593c506bbdb"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+firebaseApp.initializeApp(firebaseConfig);
 
 export default () => {
-    return { firebase, auth }
+    return { firebaseApp, auth }
 }
+
