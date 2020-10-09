@@ -1,25 +1,12 @@
 import React from 'react'
 import { View, TextInput, Button, Text } from 'react-native'
-import firebaseSetup from '../../setup'
+import firebaseSetup from '../firebaseConfig/setup'
 
 export default function HomeScreen() {
 
     const { auth } = firebaseSetup();
     const [confirm, setConfirm] = React.useState(null);
     const [code, setCode] = React.useState('');
-
-    // const handleClick = () => {
-    //     let number = '+8486026246';
-    //     firebase.auth().signInWithPhoneNumber(number).then((e) => {
-    //         let code = alert('Enter the OTP', '');
-    //         if (code == null) return;
-    //         e.confirm(code).then((result) => {
-    //             console.log('Hello user');
-    //         }).catch((error) => {
-    //             console.log(error)
-    //         })
-    //     })
-    // }
 
     // Handle the button press
     const signInWithPhoneNumber = async (phoneNumber) => {
@@ -33,6 +20,7 @@ export default function HomeScreen() {
             alert('User Sign in Successfully');
         } catch (error) {
             console.log('Invalid code.');
+            alert('Invalid OTP code');
         }
     }
 
@@ -44,7 +32,7 @@ export default function HomeScreen() {
                 alignItems: 'center'
             }}>
                 <Button
-                    color='green'
+                    color='#2980b9'
                     title="Phone Number Sign In"
                     onPress={() => signInWithPhoneNumber('+84986026246')}
                 />
@@ -53,16 +41,24 @@ export default function HomeScreen() {
     }
 
     return (
-        <View>
-            {/* <Text style={{ color: 'blue', fontSize: 24 }}>Welcome to firebase</Text>
-            <Button
-                title="Click to here"
-                color="purple"
-                onPress={handleClick}
-            /> */}
-            <Text style={{ color: 'black' }}>Screen OTP</Text>
-            <TextInput value={code} onChangeText={text => setCode(text)} />
-            <Button title="Confirm Code" onPress={() => confirmCode()} />
+        <View style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Text style={{ color: 'black', fontSize: 24 }}>Enter The OTP Code Here</Text>
+            <TextInput
+                value={code}
+                onChangeText={text => setCode(text)}
+                style={{
+                    borderWidth: 1,
+                    width: 150, height: 40,
+                    borderRadius: 10, margin: 10,
+                    justifyContent: 'center', alignItems: 'center',
+                    fontSize: 16, color: 'red', padding: 5,
+                }}
+            />
+            <Button color='#2980b9' title="Confirm Code" onPress={() => confirmCode()} />
         </View>
     )
 }
